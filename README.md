@@ -118,7 +118,7 @@ pwalk(
 )
 ```
 
-## Access Canadian demographic data with `cansim` and `cmhc` packages
+## The `cansim` and `cmhc` packages serve up fresh Canadian demographic data to go
 
 The prolific [mountainmath](https://doodles.mountainmath.ca/) has developed a suite of packages that allow for accessing the heaps of publicly available Canadian demographic data. Of note are the `cansim` and `cmhc` packages. 
 
