@@ -7,7 +7,7 @@ The [Arrow R Package](https://arrow.apache.org/docs/r/) uses the Apache Arrow pl
 
 [`open_dataset()`](https://arrow.apache.org/docs/r/reference/open_dataset.html), which opens a connection to a parquetized and partitioned dataset. This creates an Arrow Dataset, which is listed as an `<Object containing active binding>`. Arrow datasets are not located in memory, but we can pass them dplyr functions to work with them like a normal data frame. Displaying it's contents gives us the object's size and a list of it's columns and their types. 
 
-```
+``` r
 Table
 11009816 rows x 26 columns
 $col1 <int32>
@@ -24,7 +24,7 @@ $col42 <string>
 
 [`collect()`](https://dplyr.tidyverse.org/reference/compute.html) retrieves data into a local tibble. Be wary to not run `collect()` on the entire large dataset, as loading it all at once can cause your R session to crash. Instead, use `collect()` to inspect the beginning or end of the table as below:
 
-```{r}
+``` r
 df <- open_dataset(source_data, schema = schema)
 
 # Use collect on summary statics table
@@ -45,7 +45,7 @@ collect()
 At times, we need to use dplyr functions that aren't supported by arrow, and in this case we use `to_duckdb` to swap our arrow connection to [DuckBD](https://duckdb.org/docs/api/r.html) and later swap back to arrow. More on this [here](https://duckdb.org/2021/12/03/duck-arrow.html). 
 
 
-```{r}
+``` r
 df <- df_arrow %>%
   
   # swap to duckdb to use distinct with .keep_all = TRUE
@@ -67,7 +67,7 @@ It's no secret that I'm a big fan of Quarto ([see my website for example](albury
 
 Set the `params` argument in the front matter .qmd file as below. 
 
-```{}
+``` r
 ---
 title: "Document"                   # Metadata
 format:                             # Set format types
@@ -84,7 +84,7 @@ Report content goes here.           # Write content
 
 Then, you can call on your parameter using the dplyr `$` notation within the qmd file. 
 
-```{r}
+``` r
 `params$community`
 
 [1] "Vancouver"
@@ -100,7 +100,7 @@ execute_params = list(community = "Toronto") # name of community
 
 To iterate a list of parameters generating multiple documents, I created a wrapper script that relied on `quarto_render` and `purrr`'s `pwalk`. 
 
-```{r}
+``` r
  reports <- df |> 
   mutate(output_format = "docx",
          output_file = paste("prepopulated_doc",
