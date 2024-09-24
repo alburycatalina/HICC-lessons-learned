@@ -42,7 +42,7 @@ collect()
 
 `?acero` can be used to check compatible dplyr verbs. 
 
-At times, we need to use dplyr functions that aren't supported by arrow, and in this case we use `to_duckdb` to swap our arrow connection to [DuckBD](https://duckdb.org/docs/api/r.html) and later swap back to arrow. More on this [here](https://duckdb.org/2021/12/03/duck-arrow.html). 
+At times, we need to use dplyr functions that aren't supported by arrow, and in this case we use `to_duckdb` to swap our arrow connection to [DuckDB](https://duckdb.org/docs/api/r.html) and later swap back to arrow. More on this [here](https://duckdb.org/2021/12/03/duck-arrow.html). 
 
 
 ``` r
